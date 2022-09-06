@@ -28,7 +28,7 @@ object App {
       .format("kafka")
       .options(Map[String, String](
         "kafka.bootstrap.servers" -> "localhost:9092",
-        "subscribe" -> "sx_only_test",
+        "subscribe" -> "sx_only_test"
       ))
       .load()
       //struct<key:binary,value:binary,topic:string,partition:int,offset:bigint,timestamp:timestamp,timestampType:int>

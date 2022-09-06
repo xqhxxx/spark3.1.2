@@ -26,7 +26,7 @@ object S_07_JDBC_to_dataBase {
       "url"->"jdbc:mysql://localhost:3306/spring-vue",
       "dbtable"->"user",
       "user"->"root",
-      "password"->"root",
+      "password"->"root"
     )
     ss.read
       .format("jdbc")

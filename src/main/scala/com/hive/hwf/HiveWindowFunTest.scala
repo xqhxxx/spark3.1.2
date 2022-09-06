@@ -20,10 +20,10 @@ object HiveWindowFunTest {
 
 
     val df = ss.read
-      .option("header", true)
+      .option("header", value = true)
       .csv("datas/hiveFun.csv")
 
-    df.createOrReplaceTempView("test_window")
+    df.createOrReplaceTempView("hist_tb")
     //    df.show()
 
 
@@ -32,19 +32,19 @@ object HiveWindowFunTest {
 
     //ss.sql("select  *  from test_window").show()
     //1、使用 over() 函数进行数据统计, 统计每个用户及表中数据的总数
-    //    hiveQuery("select *,count(userid) over() as total  from  test_window")
+        hiveQuery("select *,count(userid) over() as total  from  test_window")
 
     //2、求用户明细并统计每天的用户总数  partition by 按日期列对数据进行分区处理
-    //    hiveQuery("select  *,count(logday)over(partition by logday) as day_total from  test_window;")
+        hiveQuery("select  *,count(logday)over(partition by logday) as day_total from  test_window;")
 
     //3、计算从第一天到现在的所有 score 大于80分的用户总数 每天往后累加的
     //只会显示总数
     //            hiveQuery("select *,count(score)over()as total from test_window where score > 80")
     //    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW（表示从起点到当前行）
     //统计每条记录的总数
-    //        hiveQuery("select *,count(1)over(order by logday rows between unbounded preceding and current row)as total from  test_window where score > 80;")
+            hiveQuery("select *,count(1)over(order by logday rows between unbounded preceding and current row)as total from  test_window where score > 80;")
 
-    //去重
+    //去重    《-- topN
     //    hiveQuery("select * from( select *,row_number()over(partition by userid order by logday ) rank from  test_window) t where t.rank=1")
 
     //显示<80的
